@@ -39,13 +39,16 @@ App = {
     loader.show();
     content.hide();
 
-    // Load account data
+    // Load my metamask data
     web3.eth.getCoinbase(function(err, account) {
       if (err === null) {
         App.account = account;
         $("#accountAddress").html("Your Account: " + account);
       }
     });
+
+    // Load Ganache Data of Users - not working
+    web3.eth.getAccounts(console.log) 
 
     // Load contract data
     App.contracts.Election.deployed().then(function(instance) {
@@ -60,9 +63,10 @@ App = {
           var id = candidate[0];
           var name = candidate[1];
           var bio = candidate[2];
+          var button = "<button>Chat</button>"
 
           // Render candidate Result
-          var candidateTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + bio + "</td></tr>"
+          var candidateTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + bio + "</td><td>" + button + "</td></tr>"
           candidatesResults.append(candidateTemplate);
         });
       }
